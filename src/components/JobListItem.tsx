@@ -1,7 +1,7 @@
 import { Job } from "@prisma/client";
 import Image from "next/image";
 import { formatCurrency, relativeDate } from "../lib/utils";
-import companyLogoPlaceholder from "../public/company-logo-placeholder.png";
+import companyLogoPlaceholder from "../assets/SnowflakeLogo.png";
 import { Banknote, Briefcase, Clock, Globe2, MapPin } from "lucide-react";
 import Badge from "./Badge";
 
