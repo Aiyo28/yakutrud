@@ -63,19 +63,23 @@ for page in rabota_pages:
 
 
         vacancy_data = {
-            "name" : title,
-            "url" : url,
-            "employer" : company,
+            "title" : title,
+            "type" : schedule,
+            "locationType": '',
+            "location" : '',
+            "description" : job_info,
             "salary" : salary,
-            "date_published" : date_published,
+            "companyName" : company,
+            "companyLogoUrl": '',
+            "createAt" : date_published,
+            "applicationEmail" : email,
+            "applicationUrl" : url,
+
+            "experience" : experience,
             "contact" : contact,
-            "email" : email,
+            "education" : education,
             "tags" : tag,
             "parent_tags" : parent_tags,
-            "education" : education,
-            "experience" : experience,
-            "schedule" : schedule,
-            "job_info" : job_info
         }
         print(vacancy_data)
 

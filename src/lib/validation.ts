@@ -35,12 +35,13 @@ const locationSchema = z
 
 const companyLogoSchema = z
   .custom<File | undefined>()
+  .refine(
+    (file) => !file || (file instanceof File && file.type.startsWith("image/")),
+    "Должен быть файл изображения",
+  )
   .refine((file) => {
-    !file || (file instanceof File && file.type.startsWith("image/"));
-  }, "Неверный формат файла")
-  .refine((file) => {
-    return !file || file.size < 1024 * 1024 * 2; // 2MB
-  });
+    return !file || file.size < 1024 * 1024 * 2;
+  }, "Размер файла должен быть меньше 2 МБ.");
 
 export const createJobSchema = z
   .object({
@@ -53,8 +54,6 @@ export const createJobSchema = z
     companyLogo: companyLogoSchema,
     description: z.string().max(5000).optional(),
     salary: numericString.max(9, "Не более 9 символов"),
-    location: z.string().min(3).max(100),
-    remote: z.boolean(),
   })
   .and(applicationSchema)
   .and(locationSchema);
