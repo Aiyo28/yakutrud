@@ -19,10 +19,10 @@ model Job {
   id                Int      @id @default(autoincrement())
   slug              String   @unique
   title             String
-  type              String
+  description       String?
+  type              String?
   locationType      String
   location          String?
-  description       String?
   salary            Int
   companyName       String
   applicationEmail  String?

@@ -5,6 +5,9 @@ const nextConfig = {
             {
                 hostname: "zwtt9bndtocwgtvn.public.blob.vercel-storage.com",
             },
+            {
+                hostname: 'rabota.ykt.ru',
+            }
         ],
     },
 };
