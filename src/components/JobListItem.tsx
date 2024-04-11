@@ -1,4 +1,4 @@
-import companyLogoPlaceholder from '@/assets/company-logo-placeholder.png';
+import companyLogoPlaceholder from '@/src/assets/Snowflake.jpg';
 import { formatMoney, relativeDate } from '@/src/lib/utils';
 import { Job } from '@prisma/client';
 import { Banknote, Briefcase, Clock, Globe2, MapPin } from 'lucide-react';

@@ -18,12 +18,9 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
 			const searchWords = locationSearchInput.split(' ');
 
 			return citiesList
-				.map(
-					(city) =>
-						`${city.name}, ${city.subcountry}, ${city.country}`
-				)
+				.map((city: any) => `${city.name}, ${city.subject}`)
 				.filter(
-					(city) =>
+					(city: any) =>
 						city
 							.toLowerCase()
 							.startsWith(searchWords[0].toLowerCase()) &&
@@ -37,7 +34,7 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
 		return (
 			<div className="relative">
 				<Input
-					placeholder="Search for a city..."
+					placeholder="Поиск города..."
 					type="search"
 					value={locationSearchInput}
 					onChange={(e) => setLocationSearchInput(e.target.value)}
@@ -49,9 +46,9 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
 				{locationSearchInput.trim() && hasFocus && (
 					<div className="absolute z-20 w-full divide-y rounded-b-lg border-x border-b bg-background shadow-xl">
 						{!cities.length && (
-							<p className="p-3">No results found.</p>
+							<p className="p-3">Результатов не найдено.</p>
 						)}
-						{cities.map((city) => (
+						{cities.map((city: any) => (
 							<button
 								key={city}
 								className="block w-full p-2 text-start"

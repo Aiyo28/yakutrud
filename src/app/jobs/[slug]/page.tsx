@@ -48,7 +48,9 @@ export default async function Page({ params: { slug } }: PageProps) {
 		: applicationUrl;
 
 	if (!applicationLink) {
-		console.error('Job has no application link or email');
+		console.error(
+			'У вакансии нет ссылки на приложение или электронной почты.'
+		);
 		notFound();
 	}
 
@@ -58,7 +60,7 @@ export default async function Page({ params: { slug } }: PageProps) {
 			<aside>
 				<Button asChild>
 					<a href={applicationLink} className="w-40 md:w-fit">
-						Apply now
+						Применить сейчас
 					</a>
 				</Button>
 			</aside>

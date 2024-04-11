@@ -19,7 +19,7 @@ export async function approveSubmission(
 		const user = await currentUser();
 
 		if (!user || !isAdmin(user)) {
-			throw new Error('Not authorized');
+			throw new Error('Не авторизован');
 		}
 
 		await prisma.job.update({
@@ -29,7 +29,7 @@ export async function approveSubmission(
 
 		revalidatePath('/');
 	} catch (error) {
-		let message = 'Unexpected error';
+		let message = 'Неожиданная ошибка';
 		if (error instanceof Error) {
 			message = error.message;
 		}
@@ -47,7 +47,7 @@ export async function deleteJob(
 		const user = await currentUser();
 
 		if (!user || !isAdmin(user)) {
-			throw new Error('Not authorized');
+			throw new Error('Не авторизован');
 		}
 
 		const job = await prisma.job.findUnique({
@@ -64,7 +64,7 @@ export async function deleteJob(
 
 		revalidatePath('/');
 	} catch (error) {
-		let message = 'Unexpected error';
+		let message = 'Не авторизован';
 		if (error instanceof Error) {
 			message = error.message;
 		}

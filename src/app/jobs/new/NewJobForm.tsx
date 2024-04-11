@@ -50,23 +50,25 @@ export default function NewJobForm() {
 		try {
 			await createJobPosting(formData);
 		} catch (error) {
-			alert('Something went wrong, please try again.');
+			alert('Что-то пошло не так. Пожалуйста, попробуйте еще раз.');
 		}
 	}
 
 	return (
 		<main className="m-auto my-10 max-w-3xl space-y-10">
 			<div className="space-y-5 text-center">
-				<H1>Find your perfect developer</H1>
+				<H1>Найдите своего идеального работника</H1>
 				<p className="text-muted-foreground">
-					Get your job posting seen by thousands of job seekers.
+					Пусть ваше объявление о работе увидят тысячи соискателей.
 				</p>
 			</div>
-			<div className="space-y-6 rounded-lg border p-4">
+			<div className="space-y-6 rounded-lg border p-4 pb-20">
 				<div>
-					<h2 className="font-semibold">Job details</h2>
-					<p className="text-muted-foreground">
-						Provide a job description and details
+					<h2 className="font-semibold text-center">
+						Детали вакансии
+					</h2>
+					<p className="text-muted-foreground text-center">
+						Укажите описание вакансии и подробности
 					</p>
 				</div>
 				<Form {...form}>
@@ -80,10 +82,10 @@ export default function NewJobForm() {
 							name="title"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Job title</FormLabel>
+									<FormLabel>Должность</FormLabel>
 									<FormControl>
 										<Input
-											placeholder="e.g. Frontend Developer"
+											placeholder="а.е. Фронтенд-разработчик"
 											{...field}
 										/>
 									</FormControl>
@@ -96,11 +98,11 @@ export default function NewJobForm() {
 							name="type"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Job type</FormLabel>
+									<FormLabel>Тип занятости</FormLabel>
 									<FormControl>
 										<Select {...field} defaultValue="">
 											<option value="" hidden>
-												Select an option
+												Выберите вариант
 											</option>
 											{jobTypes.map((jobType) => (
 												<option
@@ -118,10 +120,23 @@ export default function NewJobForm() {
 						/>
 						<FormField
 							control={control}
+							name="salary"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Зарплата</FormLabel>
+									<FormControl>
+										<Input {...field} type="number" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={control}
 							name="companyName"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Company</FormLabel>
+									<FormLabel>Компания</FormLabel>
 									<FormControl>
 										<Input {...field} />
 									</FormControl>
@@ -134,7 +149,7 @@ export default function NewJobForm() {
 							name="companyLogo"
 							render={({ field: { value, ...fieldValues } }) => (
 								<FormItem>
-									<FormLabel>Company logo</FormLabel>
+									<FormLabel>Логотип компании</FormLabel>
 									<FormControl>
 										<Input
 											{...fieldValues}
@@ -145,6 +160,7 @@ export default function NewJobForm() {
 													e.target.files?.[0];
 												fieldValues.onChange(file);
 											}}
+											placeholder='Выберете файл "png, jpg, jpeg"'
 										/>
 									</FormControl>
 									<FormMessage />
@@ -156,7 +172,7 @@ export default function NewJobForm() {
 							name="locationType"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Location</FormLabel>
+									<FormLabel>График работы</FormLabel>
 									<FormControl>
 										<Select
 											{...field}
@@ -165,14 +181,14 @@ export default function NewJobForm() {
 												field.onChange(e);
 												if (
 													e.currentTarget.value ===
-													'Remote'
+													'Удаленно'
 												) {
 													trigger('location');
 												}
 											}}
 										>
 											<option value="" hidden>
-												Select an option
+												Выберите вариант
 											</option>
 											{locationTypes.map(
 												(locationType) => (
@@ -195,7 +211,7 @@ export default function NewJobForm() {
 							name="location"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Office location</FormLabel>
+									<FormLabel>Расположение офиса</FormLabel>
 									<FormControl>
 										<LocationInput
 											onLocationSelected={field.onChange}
@@ -225,7 +241,7 @@ export default function NewJobForm() {
 						/>
 						<div className="space-y-2">
 							<Label htmlFor="applicationEmail">
-								How to apply
+								Ваше контактное информация
 							</Label>
 							<div className="flex justify-between">
 								<FormField
@@ -237,12 +253,12 @@ export default function NewJobForm() {
 												<div className="flex items-center">
 													<Input
 														id="applicationEmail"
-														placeholder="Email"
+														placeholder="Почта"
 														type="email"
 														{...field}
 													/>
 													<span className="mx-2">
-														or
+														или
 													</span>
 												</div>
 											</FormControl>
@@ -282,7 +298,7 @@ export default function NewJobForm() {
 									<Label
 										onClick={() => setFocus('description')}
 									>
-										Description
+										Описание
 									</Label>
 									<FormControl>
 										<RichTextEditor
@@ -298,21 +314,13 @@ export default function NewJobForm() {
 								</FormItem>
 							)}
 						/>
-						<FormField
-							control={control}
-							name="salary"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Salary</FormLabel>
-									<FormControl>
-										<Input {...field} type="number" />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<LoadingButton type="submit" loading={isSubmitting}>
-							Submit
+
+						<LoadingButton
+							type="submit"
+							className="mt-10 float-right ml-2 bg-blue-400 hover:bg-blue-600 text-white text-sm font-bold rounded px-2 py-1"
+							loading={isSubmitting}
+						>
+							Публиковать
 						</LoadingButton>
 					</form>
 				</Form>

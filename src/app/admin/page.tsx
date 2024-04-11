@@ -10,9 +10,9 @@ export default async function AdminPage() {
 
 	return (
 		<main className="m-auto my-10 max-w-5xl space-y-10 px-3">
-			<H1 className="text-center">Admin Dashboard</H1>
+			<H1 className="text-center">Панель администратора</H1>
 			<section className="flex flex-col gap-3">
-				<h2 className="text-lg font-bold">Unapproved jobs:</h2>
+				<h2 className="text-lg font-bold">Неутвержденные вакансии:</h2>
 				{unapprovedJobs.map((job) => (
 					<Link
 						key={job.id}
@@ -23,7 +23,9 @@ export default async function AdminPage() {
 					</Link>
 				))}
 				{unapprovedJobs.length === 0 && (
-					<p className="text-muted-foreground">No unapproved jobs</p>
+					<p className="text-muted-foreground">
+						Нет неутвержденных вакансий
+					</p>
 				)}
 			</section>
 		</main>
