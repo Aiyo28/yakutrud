@@ -48,6 +48,7 @@ def fill_job_type(location_type):
             'Проектная работа',
             'Волонтер',
             'Стажировка',
+            'Договор'
         ]
     location_types = [
             'Полный день',
@@ -76,7 +77,7 @@ def fill_job_type(location_type):
 #RABOTA.YKT
 vacancy_data = []
 
-rabota_pages = np.arange(0, 1, 1)
+rabota_pages = np.arange(0, 10, 1)
 for page in rabota_pages:
     page = requests.get('https://rabota.ykt.ru/jobs?page=' + str(page), headers=headers)
     soup = bs(page.text, 'html.parser')
@@ -131,7 +132,6 @@ for page in rabota_pages:
         
 
 
-<<<<<<< HEAD
         vacancy_obj = {
             "title" : title,
             "slug": slugify(title) + '-' + str(uuid.uuid4())[:8],
@@ -151,26 +151,6 @@ for page in rabota_pages:
             "tags" : tag,
             "parentTags" : parent_tags,
             "approved": True,
-=======
-        vacancy_data = {
-            "title" : title,
-            "type" : schedule,
-            "locationType": '',
-            "location" : '',
-            "description" : job_info,
-            "salary" : salary,
-            "companyName" : company,
-            "companyLogoUrl": '',
-            "createAt" : date_published,
-            "applicationEmail" : email,
-            "applicationUrl" : url,
-
-            "experience" : experience,
-            "contact" : contact,
-            "education" : education,
-            "tags" : tag,
-            "parent_tags" : parent_tags,
->>>>>>> 024fd08d9a198ca31feded75fb3b76f80ec9f37b
         }
         print(vacancy_obj)
         vacancy_data.append(vacancy_obj)
