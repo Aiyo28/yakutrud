@@ -1,71 +1,93 @@
-import JobFilterSidebar from '@/src/components/JobFilterSidebar';
-import JobResults from '@/src/components/JobResults';
-import H1 from '@/src/components/ui/h1';
-import { JobFilterValues } from '@/src/lib/validation';
-import { Metadata } from 'next';
+import JobFilterSidebar from "@/src/components/JobFilterSidebar";
+import JobResults from "@/src/components/JobResults";
+import H1 from "@/src/components/ui/h1";
+import { JobFilterValues } from "@/src/lib/validation";
+import { Metadata } from "next";
 
 interface PageProps {
-	searchParams: {
-		q?: string;
-		type?: string;
-		location?: string;
-		remote?: string;
-		page?: string;
-	};
+  searchParams: {
+    q?: string;
+    type?: string;
+    location?: string;
+    educationType?: string;
+    experienceType?: string;
+    minSalary?: number;
+    maxSalary?: number;
+    remote?: string;
+    page?: string;
+  };
 }
 
-function getTitle({ q, type, location, remote }: JobFilterValues) {
-	const titlePrefix = q
-		? `${q} вакансии`
-		: type
-			? `${type} вакансии`
-			: remote
-				? 'Вакансии на удаленную работу'
-				: 'Все вакансии';
+function getTitle({
+  q,
+  type,
+  location,
+  remote,
+  experienceType,
+  educationType,
+  minSalary,
+  maxSalary,
+}: JobFilterValues) {
+  const titlePrefix = q
+    ? `${q} вакансии`
+    : type
+      ? `${type} вакансии`
+      : remote
+        ? "Вакансии на удаленную работу"
+        : "Все вакансии";
 
-	const titleSuffix = location ? ` in ${location}` : '';
+  const titleSuffix = location ? ` in ${location}` : "";
 
-	return `${titlePrefix}${titleSuffix}`;
+  return `${titlePrefix}${titleSuffix}`;
 }
 
 export function generateMetadata({
-	searchParams: { q, type, location, remote },
+  searchParams: {
+    q,
+    type,
+    location,
+    remote,
+    experienceType,
+    educationType,
+    minSalary,
+    maxSalary,
+  },
 }: PageProps): Metadata {
-	return {
-		title: `${getTitle({
-			q,
-			type,
-			location,
-			remote: remote === 'true',
-		})} | ЯкуТруд`,
-	};
+  return {
+    title: `${getTitle({
+      q,
+      type,
+      location,
+      educationType,
+      experienceType,
+      remote: remote === "true",
+    })} | ЯкуТруд`,
+  };
 }
 
 export default async function Home({
-	searchParams: { q, type, location, remote, page },
+  searchParams: { q, type, location, remote, page },
 }: PageProps) {
-	const filterValues: JobFilterValues = {
-		q,
-		type,
-		location,
-		remote: remote === 'true',
-	};
+  const filterValues: JobFilterValues = {
+    q,
+    type,
+    location,
+    remote: remote === "true",
+  };
 
-	return (
-		<main className="m-auto my-10 max-w-5xl space-y-10 px-3">
-			<div className="space-y-5 text-center">
-				<H1>{getTitle(filterValues)}</H1>
-				<p className="text-muted-foreground">
-					Найди работу своей мечты.
-				</p>
-			</div>
-			<section className="flex flex-col gap-4 md:flex-row">
-				<JobFilterSidebar defaultValues={filterValues} />
-				<JobResults
-					filterValues={filterValues}
-					page={page ? parseInt(page) : undefined}
-				/>
-			</section>
-		</main>
-	);
+  return (
+    <main className="m-auto my-10 max-w-5xl space-y-10 px-3">
+      <div className="space-y-5 text-center">
+        <H1>{getTitle(filterValues)}</H1>
+        <p className="text-muted-foreground">Найди работу своей мечты.</p>
+      </div>
+      <section className="flex flex-col gap-4 md:flex-row">
+        <JobFilterSidebar defaultValues={filterValues} />
+        <JobResults
+          filterValues={filterValues}
+          page={page ? parseInt(page) : undefined}
+        />
+      </section>
+    </main>
+  );
 }

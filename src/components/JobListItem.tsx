@@ -1,7 +1,16 @@
 import companyLogoPlaceholder from "@/src/assets/company-logo-placeholder.png";
 import { formatMoney, relativeDate } from "@/src/lib/utils";
 import { Job } from "@prisma/client";
-import { Banknote, Briefcase, Clock, Globe2, MapPin } from "lucide-react";
+import {
+  Banknote,
+  Briefcase,
+  Globe2,
+  MapPin,
+  GraduationCap,
+  FileCheck,
+  CalendarClock,
+  Clock,
+} from "lucide-react";
 import Image from "next/image";
 import Badge from "./Badge";
 
@@ -37,16 +46,16 @@ export default function JobListItem({
         </div>
         <div className="text-muted-foreground">
           <p className="flex items-center gap-1.5 sm:hidden">
-            <Briefcase size={16} className="shrink-0" />
+            <CalendarClock size={16} className="shrink-0" />
             {type}
           </p>
           <p className="flex items-center gap-1.5">
-            <MapPin size={16} className="shrink-0" />
+            <Globe2 size={16} className="shrink-0" />
             {locationType}
           </p>
           <p className="flex items-center gap-1.5">
-            <Globe2 size={16} className="shrink-0" />
-            {location || "Worldwide"}
+            <MapPin size={16} className="shrink-0" />
+            {location || "Удаленно"}
           </p>
           <p className="flex items-center gap-1.5">
             <Banknote size={16} className="shrink-0" />
