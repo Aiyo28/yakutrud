@@ -2,7 +2,7 @@ import { experienceType, educationType, jobTypes } from "@/src/lib/job-types";
 import prisma from "@/src/lib/prisma";
 import { JobFilterValues, jobFilterSchema } from "@/src/lib/validation";
 import { redirect } from "next/navigation";
-import FormSubmitButton from "./FormSubmitButton";
+import FormSubmitButton from "./submitButt";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import Select from "./ui/select";
