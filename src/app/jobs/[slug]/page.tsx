@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLink } from "@fortawesome/fontawesome-free-solid";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 interface PageProps {
   params: { slug: string };
