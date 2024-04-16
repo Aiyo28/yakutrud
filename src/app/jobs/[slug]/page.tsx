@@ -86,15 +86,17 @@ export default async function Page({ params: { slug } }: PageProps) {
             </div>
           )}
           <div className={phone ? "lg:ml-3" : ""}>
-            <Button asChild title="Открыть ссылку в новой вкладке">
-              <a
-                href={applicationUrl}
-                target="_blank"
-                className="w-40 hover:bg-slate-500 md:w-fit"
-              >
-                <FontAwesomeIcon icon={faLink} className="h-6 font-light" />
-              </a>
-            </Button>
+            {applicationUrl && (
+              <Button asChild title="Открыть ссылку в новой вкладке">
+                <a
+                  href={applicationUrl}
+                  target="_blank"
+                  className="w-40 hover:bg-slate-500 md:w-fit"
+                >
+                  <FontAwesomeIcon icon={faLink} className="h-6 font-light" />
+                </a>
+              </Button>
+            )}
           </div>
         </div>
         <div className="mt-2">
