@@ -9,8 +9,8 @@ interface PageProps {
     q?: string;
     type?: string;
     location?: string;
-    educationType?: string;
-    experienceType?: string;
+    education?: string;
+    experience?: string;
     minSalary?: number;
     maxSalary?: number;
     remote?: string;
@@ -23,8 +23,8 @@ function getTitle({
   type,
   location,
   remote,
-  experienceType,
-  educationType,
+  experience,
+  education,
   minSalary,
   maxSalary,
 }: JobFilterValues) {
@@ -47,8 +47,8 @@ export function generateMetadata({
     type,
     location,
     remote,
-    experienceType,
-    educationType,
+    experience,
+    education,
     minSalary,
     maxSalary,
   },
@@ -58,20 +58,22 @@ export function generateMetadata({
       q,
       type,
       location,
-      educationType,
-      experienceType,
+      experience,
+      education,
       remote: remote === "true",
     })} | ЯкуТруд`,
   };
 }
 
 export default async function Home({
-  searchParams: { q, type, location, remote, page },
+  searchParams: { q, type, location, education, experience, remote, page },
 }: PageProps) {
   const filterValues: JobFilterValues = {
     q,
     type,
     location,
+    experience,
+    education,
     remote: remote === "true",
   };
 

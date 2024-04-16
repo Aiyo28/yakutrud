@@ -84,7 +84,7 @@ vacancy_data = []
 
 #RABOTA.YKT
 def ykt_get_vacancies():
-    rabota_pages = np.arange(0, 10, 1)
+    rabota_pages = np.arange(0, 20, 1)
     for page in rabota_pages:
         page = requests.get('https://rabota.ykt.ru/jobs?page=' + str(page), headers=headers)
         soup = bs(page.text, 'html.parser')

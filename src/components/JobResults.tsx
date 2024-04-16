@@ -22,8 +22,8 @@ export default async function JobResults({
     remote,
     minSalary,
     maxSalary,
-    educationType,
-    experienceType,
+    education,
+    experience,
   } = filterValues;
 
   const jobsPerPage = 20;
@@ -41,6 +41,9 @@ export default async function JobResults({
           { title: { search: searchString } },
           { companyName: { search: searchString } },
           { type: { search: searchString } },
+          { description: { search: searchString } },
+          { education: { search: searchString } },
+          { experience: { search: searchString } },
           { locationType: { search: searchString } },
           { location: { search: searchString } },
         ],
@@ -53,10 +56,10 @@ export default async function JobResults({
       type ? { type } : {},
       location ? { location } : {},
       remote ? { locationType: "Remote" } : {},
+      education ? { education: education } : {},
+      experience ? { experience: experience } : {},
       minSalary ? { salary: { gte: parseInt(minSalary) } } : {},
       maxSalary ? { salary: { lte: parseInt(maxSalary) } } : {},
-      educationType ? { education: educationType } : {},
-      experienceType ? { experience: experienceType } : {},
       { approved: true },
     ],
   };
@@ -74,11 +77,13 @@ export default async function JobResults({
 
   return (
     <div className="grow space-y-4">
-      {jobs.map((job) => (
-        <Link key={job.id} href={`/jobs/${job.slug}`} className="block">
-          <JobListItem job={job} />
-        </Link>
-      ))}
+      {jobs
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+        .map((job) => (
+          <Link key={job.id} href={`/jobs/${job.slug}`} className="block">
+            <JobListItem job={job} />
+          </Link>
+        ))}
       {jobs.length === 0 && (
         <p className="m-auto text-center">
           Вакансий не найдено. Попробуйте настроить фильтры поиска.
@@ -109,8 +114,8 @@ function Pagination({
     type,
     location,
     remote,
-    experienceType,
-    educationType,
+    experience,
+    education,
     maxSalary,
     minSalary,
   },
@@ -121,8 +126,8 @@ function Pagination({
       ...(type && { type }),
       ...(location && { location }),
       ...(remote && { remote: "true" }),
-      ...(experienceType && { experienceType }),
-      ...(educationType && { educationType }),
+      ...(experience && { experience }),
+      ...(education && { education }),
       ...(minSalary && { minSalary }),
       ...(maxSalary && { maxSalary }),
       page: page.toString(),

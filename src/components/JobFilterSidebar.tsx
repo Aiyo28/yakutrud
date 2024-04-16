@@ -17,11 +17,11 @@ async function filterJobs(formData: FormData) {
     q,
     type,
     location,
-    remote,
-    minSalary,
-    maxSalary,
     education,
     experience,
+    minSalary,
+    maxSalary,
+    remote,
   } = jobFilterSchema.parse(values);
 
   const searchParams = new URLSearchParams({
@@ -84,21 +84,6 @@ export default async function JobFilterSidebar({
             </Select>
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="experience">Опыт:</Label>
-            <Select
-              id="experience"
-              name="experience"
-              defaultValue={defaultValues.experience || ""}
-            >
-              <option value="">Все</option>
-              {experienceType.map((exp) => (
-                <option key={exp} value={exp}>
-                  {exp}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <div className="flex flex-col gap-2">
             <Label htmlFor="education">Образование:</Label>
             <Select
               id="education"
@@ -109,6 +94,21 @@ export default async function JobFilterSidebar({
               {educationType.map((edu) => (
                 <option key={edu} value={edu}>
                   {edu}
+                </option>
+              ))}
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="experience">Опыт:</Label>
+            <Select
+              id="experience"
+              name="experience"
+              defaultValue={defaultValues.experience || ""}
+            >
+              <option value="">Все</option>
+              {experienceType.map((exp) => (
+                <option key={exp} value={exp}>
+                  {exp}
                 </option>
               ))}
             </Select>

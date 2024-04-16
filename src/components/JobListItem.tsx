@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Badge from "./Badge";
+import { educationType } from "../lib/job-types";
 
 interface JobListItemProps {
   job: Job;
@@ -26,6 +27,8 @@ export default function JobListItem({
     locationType,
     location,
     salary,
+    education,
+    experience,
     companyLogoUrl,
     createdAt,
   },
@@ -69,6 +72,12 @@ export default function JobListItem({
       </div>
       <div className="hidden shrink-0 flex-col items-end justify-between sm:flex">
         <Badge>{type}</Badge>
+        {education && education !== "Не имеет значения" && (
+          <Badge>{education}</Badge>
+        )}
+        {experience && experience !== "Не имеет значения" && (
+          <Badge>{experience}</Badge>
+        )}
         <span className="flex items-center gap-1.5 text-muted-foreground">
           <Clock size={16} />
           {relativeDate(createdAt)}
