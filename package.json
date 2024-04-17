@@ -29,6 +29,7 @@
     "eslint": "^8.0.0",
     "eslint-config-next": "^14.2.1",
     "i": "^0.3.7",
+    "immutable": "^4.3.5",
     "lucide-react": "^0.303.0",
     "markdown-draft-js": "^2.4.0",
     "nanoid": "^5.0.7",
