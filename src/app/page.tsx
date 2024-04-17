@@ -1,0 +1,95 @@
+import JobFilterSidebar from "@/src/components/JobFilterSidebar";
+import JobResults from "@/src/components/JobResults";
+import H1 from "@/src/components/ui/h1";
+import { JobFilterValues } from "@/src/lib/validation";
+import { Metadata } from "next";
+
+interface PageProps {
+  searchParams: {
+    q?: string;
+    type?: string;
+    location?: string;
+    education?: string;
+    experience?: string;
+    minSalary?: number;
+    maxSalary?: number;
+    remote?: string;
+    page?: string;
+  };
+}
+
+function getTitle({
+  q,
+  type,
+  location,
+  remote,
+  experience,
+  education,
+  minSalary,
+  maxSalary,
+}: JobFilterValues) {
+  const titlePrefix = q
+    ? `${q} вакансии`
+    : type
+      ? `${type} вакансии`
+      : remote
+        ? "Вакансии на удаленную работу"
+        : "Все вакансии";
+
+  const titleSuffix = location ? ` in ${location}` : "";
+
+  return `${titlePrefix}${titleSuffix}`;
+}
+
+export function generateMetadata({
+  searchParams: {
+    q,
+    type,
+    location,
+    remote,
+    experience,
+    education,
+    minSalary,
+    maxSalary,
+  },
+}: PageProps): Metadata {
+  return {
+    title: `${getTitle({
+      q,
+      type,
+      location,
+      experience,
+      education,
+      remote: remote === "true",
+    })} | ЯкуТруд`,
+  };
+}
+
+export default async function Home({
+  searchParams: { q, type, location, education, experience, remote, page },
+}: PageProps) {
+  const filterValues: JobFilterValues = {
+    q,
+    type,
+    location,
+    experience,
+    education,
+    remote: remote === "true",
+  };
+
+  return (
+    <main className="m-auto my-10 max-w-5xl space-y-10 px-3">
+      <div className="space-y-5 text-center">
+        <H1>{getTitle(filterValues)}</H1>
+        <p className="text-muted-foreground">Найди работу своей мечты.</p>
+      </div>
+      <section className="flex flex-col gap-4 md:flex-row">
+        <JobFilterSidebar defaultValues={filterValues} />
+        <JobResults
+          filterValues={filterValues}
+          page={page ? parseInt(page) : undefined}
+        />
+      </section>
+    </main>
+  );
+}
